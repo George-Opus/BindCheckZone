@@ -2,6 +2,7 @@
 RED='\033[31m'
 RESET='\033[0m'
 BLUE='\033[34m'
+GREEN='\033[32m'
 CONFIG_FILE="/etc/named.*.zones"
 ls -l $CONFIG_FILE | awk '{print $9}' | while read -r file; do
 	if [ "$1" = "-v" ] || [ "$1" = "-vv"  ]
@@ -21,7 +22,10 @@ ls -l $CONFIG_FILE | awk '{print $9}' | while read -r file; do
         		if [ -z $check ]
 			then
 				echo -e ${RED}| $(named-checkzone "$zone" "$filename")${RESET}
+			elif [ "$1" == "-vv" ]
+				echo -e ${GREEN}"$zone OK"${RESET}
 			fi
+				
         	fi
     	done
 done
