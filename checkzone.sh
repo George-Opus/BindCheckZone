@@ -21,9 +21,10 @@ ls -l $CONFIG_FILE | awk '{print $9}' | while read -r file; do
 			check=$(named-checkzone "$zone" "$filename" | grep "OK")
         		if [ -z $check ]
 			then
-				echo -e ${RED}| $(named-checkzone "$zone" "$filename")${RESET}
+				echo -e ${RED} $(named-checkzone "$zone" "$filename") ${RESET}
 			elif [ "$1" == "-vv" ]
-				echo -e ${GREEN}"$zone OK"${RESET}
+   			then
+				echo -e ${GREEN} "$zone OK" ${RESET}
 			fi
 				
         	fi
